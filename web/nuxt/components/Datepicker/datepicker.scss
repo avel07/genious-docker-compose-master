@@ -1,0 +1,40 @@
+.mx-datepicker {
+    width: 100%;
+}
+.mx-datepicker-main {
+    color: #3a3a3a;
+    font-family: 'Futura PT', sans-serif;
+    background: #f7f7f7;
+}
+.mx-table-date .today {
+    color: #000000;
+}
+.mx-calendar-content .cell:hover {
+    color: #ffffff;
+    background-color: #3a3a3a;
+}
+.mx-calendar-content .cell.active {
+    background-color: #3a3a3a;
+}
+.mx-btn {
+    color: #a8a8a8;
+    &:hover {
+        color: #000000;
+    }
+}
+.mx-btn-text {
+    text-transform: uppercase;
+}
+.mx-table-date td {
+    font-size: 14px;
+}
+.mx-table-date th {
+    font-size: 14px;
+    color: #a8a8a8;
+}
+.mx-calendar {
+    width: 320px;
+}
+.mx-table-date .cell.not-current-month {
+    color: #a8a8a8;
+}

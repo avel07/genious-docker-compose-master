@@ -1,0 +1,37 @@
+{
+    "name": "genious",
+    "private": true,
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
+    },
+    "scripts": {
+        "start": "node .output/server/index.mjs",
+        "build": "nuxt build --dotenv /.env",
+        "dev": "nuxt dev",
+        "dev:docker": "nuxt dev --dotenv /.env",
+        "generate": "nuxt generate",
+        "preview": "nuxt preview",
+        "prepare": "cd ../../ && husky install ./web/nuxt/.husky",
+        "prettier": "prettier --write .",
+        "prettier:verify": "prettier --check .",
+        "postinstall": "nuxt prepare"
+    },
+    "devDependencies": {
+        "@types/lodash.debounce": "^4.0.7",
+        "husky": "^8.0.3",
+        "nuxt": "3.1.2",
+        "prettier": "2.8.1",
+        "sass": "^1.56.1",
+        "sass-loader": "^10.4.1"
+    },
+    "dependencies": {
+        "@fancyapps/ui": "^4.0.31",
+        "is-https": "^4.0.0",
+        "lodash.debounce": "^4.0.8",
+        "primevue": "^3.23.0",
+        "swiper": "^8.4.5",
+        "vite-svg-loader": "^3.6.0",
+        "vue-datepicker-next": "^1.0.2",
+        "vue-select": "^4.0.0-beta.6"
+    }
+}

@@ -1,0 +1,10 @@
+.header-menu {
+    padding-bottom: 60px;
+    &__list {
+        li {
+            &:not(:first-child) {
+                margin-top: 5px;
+            }
+        }
+    }
+}

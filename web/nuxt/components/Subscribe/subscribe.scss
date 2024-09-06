@@ -1,0 +1,10 @@
+.subscribe {
+    width: 265px;
+    &__title {
+        line-height: 1.625;
+    }
+    @media screen and (max-width: 768px) {
+        margin: 0 auto;
+        width: 100%;
+    }
+}

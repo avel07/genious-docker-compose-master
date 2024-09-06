@@ -1,0 +1,14 @@
+.form {
+    &__field {
+        position: relative;
+    }
+    &__error {
+        letter-spacing: 0em;
+    }
+    &__button {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}

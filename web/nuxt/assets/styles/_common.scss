@@ -1,0 +1,155 @@
+body {
+    background: #ffffff;
+    color: #3a3a3a;
+    line-height: 1.31;
+    font-size: 14px;
+    font-family: 'Futura PT', sans-serif;
+    &.is-fixed {
+        overflow: hidden;
+    }
+    @media screen and (max-width: 576px) {
+        font-size: 13px;
+    }
+}
+
+.content {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: 1728px;
+    &_medium {
+        max-width: 1444px;
+    }
+    &_small {
+        max-width: 1160px;
+    }
+    &_little {
+        max-width: 590px;
+    }
+    @media screen and (max-width: 375px) {
+        padding: 0 16px;
+    }
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+svg {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    color: inherit;
+    fill: transparent;
+    stroke: transparent;
+}
+
+.text-center {
+    text-align: center;
+}
+.text-right {
+    text-align: right;
+}
+.text-t-center {
+    @media screen and (max-width: 992px) {
+        text-align: center;
+    }
+}
+.text-m-left {
+    @media screen and (max-width: 768px) {
+        text-align: left;
+    }
+}
+.text-s-left {
+    @media screen and (max-width: 576px) {
+        text-align: left;
+    }
+}
+
+.text-white {
+    color: #ffffff;
+}
+.text-grey {
+    color: #848484;
+}
+.text-light-grey {
+    color: #a8a8a8;
+}
+.text-faded-grey {
+    color: #cccccc;
+}
+.text-black {
+    color: #000000;
+}
+.text-red {
+    color: #e0632d;
+}
+
+.bg-black {
+    background-color: #000000;
+}
+.bg-white {
+    background-color: #ffffff;
+}
+.bg-grey {
+    background-color: #f9f9f4;
+}
+
+.list-reset {
+    list-style: none;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+.d-block {
+    display: block;
+}
+.d-show {
+    display: none;
+    @media screen and (max-width: 1200px) {
+        display: block;
+    }
+}
+.d-hidden {
+    @media screen and (max-width: 1200px) {
+        display: none;
+    }
+}
+.t-show-inline {
+    display: none;
+    @media screen and (max-width: 992px) {
+        display: inline;
+    }
+}
+.t-show {
+    display: none;
+    @media screen and (max-width: 992px) {
+        display: block;
+    }
+}
+.t-hidden {
+    @media screen and (max-width: 992px) {
+        display: none;
+    }
+}
+.m-show {
+    display: none;
+    @media screen and (max-width: 768px) {
+        display: block;
+    }
+}
+.m-hidden {
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+
+.h-100 {
+    height: 100%;
+}

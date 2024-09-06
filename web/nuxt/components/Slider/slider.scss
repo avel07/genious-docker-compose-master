@@ -1,0 +1,276 @@
+.slider {
+    &.swiper-horizontal > {
+        .swiper-pagination-progressbar {
+            height: 2px;
+            top: auto;
+            bottom: 10px;
+            left: 40px;
+            right: 40px;
+            width: auto;
+            background: #3a3a3a;
+            .swiper-pagination-progressbar-fill {
+                background: #3a3a3a;
+                top: -3px;
+                height: 8px;
+            }
+        }
+        .swiper-pagination-bullets {
+            bottom: 0;
+            .swiper-pagination-bullet {
+                width: 8px;
+                height: 8px;
+                background: transparent;
+                opacity: 1;
+                border: 1px solid #000000;
+                &.swiper-pagination-bullet-active {
+                    background: #000000;
+                }
+            }
+        }
+    }
+    .swiper-pagination-fraction {
+        bottom: 12px;
+        left: 20px;
+        right: 20px;
+        width: auto;
+        color: #000000;
+        text-align: left;
+        font-size: 16px;
+    }
+    .swiper-button-prev,
+    .swiper-button-next {
+        background-repeat: no-repeat;
+        background-size: 100%;
+        cursor: pointer;
+        position: absolute;
+        transition: 0.3s;
+        z-index: 5;
+        margin: 0;
+        &.swiper-button-disabled {
+            cursor: default;
+            opacity: 0.3;
+        }
+    }
+    .swiper-button-prev {
+        background-image: url('../../assets/img/arrow-prev.svg');
+        &::after {
+            content: '';
+        }
+    }
+    .swiper-button-next {
+        background-image: url('../../assets/img/arrow-next.svg');
+        &::after {
+            content: '';
+        }
+    }
+
+    &_products {
+        padding-bottom: 60px;
+        .swiper-button-prev,
+        .swiper-button-next {
+            width: 20px;
+            height: 20px;
+            bottom: 0;
+            top: auto;
+            transform: none;
+        }
+        .swiper-button-prev {
+            left: 0;
+        }
+        .swiper-button-next {
+            right: 0;
+        }
+        .swiper-slide {
+            height: auto;
+        }
+    }
+
+    &_products-add {
+        .slider__item {
+            width: calc(25% - 20px);
+            &_lg {
+                width: calc(50% - 20px);
+            }
+        }
+    }
+
+    &_arrow {
+        .swiper-button-prev,
+        .swiper-button-next {
+            width: 40px;
+            height: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    &_product-card {
+        .swiper-slide {
+            height: auto;
+        }
+        .swiper-button-prev {
+            left: 10px;
+        }
+        .swiper-button-next {
+            right: 10px;
+        }
+    }
+
+    &_main {
+        max-width: 1624px;
+        margin: 0 auto;
+        padding-bottom: 42px;
+        .swiper-button-prev {
+            left: 16px;
+        }
+        .swiper-button-next {
+            right: 16px;
+        }
+
+        .swiper-slide {
+            img {
+                display: block;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &_view {
+        .swiper-button-prev {
+            left: 20px;
+        }
+        .swiper-button-next {
+            right: 20px;
+        }
+        .swiper-slide {
+            height: auto;
+        }
+        .swiper-pagination-fraction {
+            display: none;
+        }
+    }
+
+    &_thumbs {
+        padding-top: 72px;
+        margin-top: 20px;
+        .swiper-slide {
+            width: 122px;
+            cursor: pointer;
+            height: auto;
+        }
+        &.swiper-horizontal > {
+            .swiper-pagination-bullets {
+                bottom: auto;
+                top: 0;
+            }
+        }
+    }
+
+    @media screen and (max-width: 992px) {
+        &_view {
+            .swiper-pagination-fraction {
+                display: block;
+            }
+        }
+        &_products-add {
+            .slider__item {
+                width: calc(50% - 20px);
+                &_lg {
+                    width: calc(100% - 20px);
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 768px) {
+        &_main {
+            .swiper-slide {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        &_products {
+            padding-bottom: 0;
+            .swiper-pagination-progressbar {
+                display: none;
+            }
+            .swiper-button-prev,
+            .swiper-button-next {
+                width: 24px;
+                height: 24px;
+                bottom: auto;
+                top: 50%;
+                transform: translateY(-50%);
+                margin-top: -34px;
+            }
+            .swiper-button-prev {
+                left: 10px;
+            }
+            .swiper-button-next {
+                right: 10px;
+            }
+
+            .slider_product-card {
+                .swiper-button-prev {
+                    display: none;
+                }
+                .swiper-button-next {
+                    display: none;
+                }
+            }
+        }
+        &_product-card {
+            .swiper-button-prev {
+                left: 2px;
+            }
+            .swiper-button-next {
+                right: 2px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        &_products {
+            .swiper-button-prev,
+            .swiper-button-next {
+                margin-top: -28px;
+            }
+        }
+        &_products-main {
+            .product-card__content {
+                padding: 0;
+            }
+        }
+        &_products-add {
+            margin-left: -20px;
+            margin-right: -20px;
+            .slider__item {
+                width: 50%;
+                &_lg {
+                    width: 50%;
+                }
+            }
+        }
+        &_main {
+            padding-bottom: 0;
+        }
+
+        &_arrow {
+            .swiper-button-prev,
+            .swiper-button-next {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 375px) {
+        &_products-add {
+            margin-left: -16px;
+            margin-right: -16px;
+        }
+        .swiper-pagination-fraction {
+            left: 16px;
+            right: 48px;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+.vscode
+
+# temp files
+*.swp
+# logs
+*.log
+
+# sql dumps
+*.sql
+
+# urls file used in urls.py
+/scripts/urls.txt
+
+# backups folder
+/backup
+
+# logs folder
+/logs/*
+
+# private folder
+/private/*
+
+# env file
+.env
+
+!.keep

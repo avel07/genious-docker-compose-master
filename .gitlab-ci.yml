@@ -1,0 +1,74 @@
+stages:
+  - env
+  - build
+  - deploy
+
+# Деплой bitrix и git pull
+bitrix_deploy:
+  image: "node:18-alpine"
+  stage: deploy
+  before_script:
+    - 'which ssh-agent || (apk update && apk add openssh-client)'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+    - |
+        ssh $PROD_SSH_USER@$PROD_SSH_HOST "
+          set -x -e
+          cd $PROD_SSH_DIR
+          git checkout $CI_COMMIT_REF_NAME
+          git pull
+          cd docker
+          docker compose --env-file=$PROD_SSH_DIR/.env exec php php -d short_open_tag=1 bitrix/modules/sprint.migration/tools/migrate.php ls --new
+          docker compose --env-file=$PROD_SSH_DIR/.env exec php php -d short_open_tag=1 bitrix/modules/sprint.migration/tools/migrate.php up
+          docker compose --env-file=$PROD_SSH_DIR/.env exec php composer install -d /web/bitrix/local
+          exit
+        "
+  only:
+    - master
+  tags:
+    - docker
+
+# Сборка nuxt приложения и создание артефакта
+nuxt_build:
+  image: "node:18-alpine"
+  stage: build
+  script:
+      - cd ./web/nuxt && npm ci && npm cache clean --force && npm run build
+  artifacts:
+    expire_in: 1h
+    paths:
+      - ./web/nuxt/.output
+  only:
+    - master
+  tags:
+    - docker
+
+# Деплой артефакта на прод
+nuxt_deploy:
+  stage: deploy
+  needs: [nuxt_build]
+  before_script:
+    - 'which ssh-agent || (apk update && apk add openssh-client)'
+    - which rsync || (apk update && apk add rsync)
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+  script:
+      - rsync -rav --delete ./web/nuxt/.output/ $PROD_SSH_USER@$PROD_SSH_HOST:$PROD_SSH_DIR/web/nuxt/.output
+      - |
+        ssh $PROD_SSH_USER@$PROD_SSH_HOST "
+          set -x -e
+          cd $PROD_SSH_DIR/docker
+          docker compose --env-file=$PROD_SSH_DIR/.env up -d --no-deps --scale nuxt=2 --no-recreate nuxt
+          docker compose --env-file=$PROD_SSH_DIR/.env exec nginx-genious /usr/sbin/nginx -s reload
+          docker compose --env-file=$PROD_SSH_DIR/.env up -d --no-deps --scale nuxt=1 --no-recreate nuxt
+          docker compose --env-file=$PROD_SSH_DIR/.env exec nginx-genious /usr/sbin/nginx -s reload
+        "
+  only:
+    - master
+  tags:
+    - docker

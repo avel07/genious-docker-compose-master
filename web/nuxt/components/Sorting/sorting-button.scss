@@ -1,0 +1,23 @@
+.sorting-button {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 12px;
+    background: #000000;
+    border-radius: 38px;
+    color: #ffffff;
+    &__text {
+        padding-right: 20px;
+    }
+
+    &__icon {
+        width: 16px;
+        height: 16px;
+        min-width: 16px;
+        transition: 0.3s;
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+}

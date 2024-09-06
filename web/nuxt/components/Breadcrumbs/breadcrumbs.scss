@@ -1,0 +1,12 @@
+.breadcrumbs {
+    &__link {
+        display: inline-block;
+        vertical-align: top;
+        &::after {
+            content: '/';
+            display: inline-block;
+            vertical-align: top;
+            padding: 0 6px;
+        }
+    }
+}

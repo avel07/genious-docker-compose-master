@@ -1,0 +1,108 @@
+.radio {
+    display: block;
+    cursor: pointer;
+    &__input {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        left: -99999px;
+        &:checked + .radio__wrapper {
+            .radio__icon {
+                &::after {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    &__wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    &__content {
+        display: block;
+        padding-left: 20px;
+        flex-grow: 1;
+        min-width: 0;
+        img {
+            display: block;
+        }
+    }
+
+    &__icon {
+        width: 12px;
+        min-width: 12px;
+        height: 12px;
+        border: 1px solid #000000;
+        display: block;
+        border-radius: 50%;
+        position: relative;
+        &::after {
+            width: 6px;
+            height: 6px;
+            background: #000000;
+            transition: 0.3s;
+            border-radius: 50%;
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+    }
+
+    &_top {
+        .radio__wrapper {
+            align-items: flex-start;
+        }
+        .radio__icon {
+            margin-top: 5px;
+        }
+    }
+
+    &_square {
+        .radio__wrapper {
+            align-items: flex-start;
+        }
+        .radio__icon {
+            margin-top: 5px;
+            border-radius: 0;
+            &::after {
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+                top: 0;
+                left: 0;
+                transform: none;
+            }
+        }
+    }
+
+    &_border {
+        .radio__wrapper {
+            padding: 24px;
+            border: 1px solid #a8a8a8;
+            border-radius: 7px;
+            transition: 0.3s;
+        }
+        .radio__input {
+            &:checked + .radio__wrapper {
+                border-color: #000000;
+            }
+        }
+    }
+    @media screen and (max-width: 768px) {
+        &_border {
+            .radio__wrapper {
+                padding: 15px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 375px) {
+        &__content {
+            padding-left: 10px;
+        }
+    }
+}

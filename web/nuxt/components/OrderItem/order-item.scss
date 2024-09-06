@@ -1,0 +1,52 @@
+.order {
+    border-bottom: 1px solid #a8a8a8;
+    padding-bottom: 30px;
+    &:not(:last-child) {
+        margin-bottom: 16px;
+    }
+
+    &__image {
+        width: 123px;
+        min-width: 123px;
+        overflow: hidden;
+        display: block;
+        img {
+            display: block;
+            transition: 0.5s ease-in-out;
+            transform-origin: 0 0;
+            width: 100%;
+        }
+        &:hover {
+            img {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    &__info {
+        max-width: 280px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    &__top {
+        flex-grow: 1;
+    }
+
+    @media screen and (max-width: 992px) {
+        &__products {
+            order: -1;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        &__image {
+            width: 104px;
+            min-width: 104px;
+        }
+    }
+}

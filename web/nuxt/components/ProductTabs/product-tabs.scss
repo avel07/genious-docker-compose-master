@@ -1,0 +1,54 @@
+.product-tabs {
+    &__link {
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover:not(.is-active) {
+            opacity: 0.6;
+        }
+        &.is-active {
+            text-decoration: underline;
+        }
+    }
+    &__block {
+        ul {
+            list-style: none;
+            &:not(:first-child) {
+                margin-top: 14px;
+            }
+            li {
+                position: relative;
+                padding-left: 16px;
+                &::before {
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    background: #000000;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 10px;
+                    left: 0;
+                }
+                &:not(:first-child) {
+                    margin-top: 8px;
+                }
+            }
+        }
+        p {
+            &:not(:first-child) {
+                margin-top: 14px;
+            }
+        }
+    }
+    @media screen and (max-width: 576px) {
+        &__block {
+            ul {
+                li {
+                    &::before {
+                        top: 8px;
+                    }
+                }
+            }
+        }
+    }
+}

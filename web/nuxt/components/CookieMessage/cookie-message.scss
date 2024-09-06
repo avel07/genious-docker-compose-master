@@ -1,0 +1,19 @@
+.cookie-message {
+    position: fixed;
+    width: 424px;
+    bottom: 20px;
+    right: 20px;
+    z-index: 101;
+    padding: 24px 20px;
+    @media screen and (max-width: 992px) {
+        width: auto;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+    @media screen and (max-width: 375px) {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}

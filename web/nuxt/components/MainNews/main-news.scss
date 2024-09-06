@@ -1,0 +1,47 @@
+.main-news {
+    background: #f9f9f4;
+
+    &__content {
+        max-width: 690px;
+        margin: 0 auto;
+    }
+    &__text {
+        margin-top: 68px;
+    }
+    &__button {
+        margin-top: 100px;
+    }
+    &__label {
+        text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 992px) {
+        background: #000000;
+        color: #ffffff;
+        &__content {
+            margin-top: 24px;
+        }
+        &__text {
+            margin-top: 34px;
+            letter-spacing: normal;
+        }
+        &__button {
+            margin-top: 50px;
+        }
+        &__image {
+            padding: 0 34px;
+        }
+        &__label {
+            letter-spacing: normal;
+        }
+        .button_dark-border {
+            border: 1px solid #ffffff;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        &__label {
+            text-transform: none;
+        }
+    }
+}

@@ -1,0 +1,39 @@
+.counter {
+    display: flex;
+    align-items: center;
+
+    &__button {
+        width: 20px;
+        min-width: 20px;
+        transition: 0.3s;
+        cursor: pointer;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: transparent;
+        margin-left: 2px;
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+
+    &__data {
+        min-width: 48px;
+        height: 21px;
+        padding: 0 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #000000;
+        border-radius: 3px;
+        text-align: center;
+        margin-right: 12px;
+    }
+    @media screen and (max-width: 576px) {
+        &__data {
+            min-width: 32px;
+        }
+    }
+}

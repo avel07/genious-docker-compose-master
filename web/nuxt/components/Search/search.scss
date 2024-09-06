@@ -1,0 +1,46 @@
+.search {
+    position: relative;
+    max-width: 540px;
+    margin: 0 auto;
+
+    &__input {
+        text-align: center;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    &__icon {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 2px;
+        left: 0;
+    }
+    &__button {
+        position: absolute;
+        top: 4px;
+        right: 0;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+        color: #a8a8a8;
+        &:hover {
+            color: #000000;
+        }
+    }
+    @media screen and (max-width: 1200px) {
+        margin: 0;
+        max-width: none;
+    }
+    @media screen and (max-width: 768px) {
+        &__input {
+            font-size: 20px;
+        }
+    }
+    @media screen and (max-width: 576px) {
+        &__input {
+            font-size: 14px;
+        }
+    }
+}

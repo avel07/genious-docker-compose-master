@@ -1,0 +1,36 @@
+FROM phpdockerio/php:8.1-fpm
+# https://github.com/bitrixdock/bitrixdock/blob/master/php80/Dockerfile
+
+RUN apt-get update \
+    && apt-get -y --allow-downgrades --no-install-recommends install \
+    php8.1-memcached \
+    php8.1-memcache \
+    php8.1-mbstring \
+    php8.1-mysql \
+    php8.1-intl \
+    php8.1-interbase \
+    php8.1-soap \
+    php8.1-gd \
+    php8.1-imagick \
+    php8.1-opcache \
+    php8.1-zip \
+    php-pear php8.1-dev libmcrypt-dev gcc make autoconf libc-dev pkg-config \
+    msmtp \
+    msmtp-mta \
+    sudo \
+    cron \
+    composer \
+    && pecl install mcrypt-1.0.5 \
+    && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+# msmtp to allow email sending
+# msmtp-mta to allow sendmail usage with msmtp
+# sudo to allow create logfile with www-data user
+# cron to run cronjobs in a separate container
+
+RUN usermod -u 1000 www-data
+RUN groupmod -g 1000 www-data
+
+WORKDIR "/web/bitrix"
+
+EXPOSE 9000

@@ -1,0 +1,1 @@
+export default () => useNuxtApp().$basket;

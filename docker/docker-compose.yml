@@ -1,0 +1,122 @@
+version: "3.3"
+
+services:
+    # Основной сервер, обратный прокси
+    # Предполагается, что traefik управляет внешне как обратный прокси. По этому нам нужен только 80 порт
+    nginx-genious:
+        build: ./config/nginx
+        depends_on:
+            - php
+            - nuxt
+            - memcached
+        links:
+            - memcached
+            - php
+        volumes:
+            # dirs
+            - ../web/bitrix:/web/bitrix
+            - ../web/nuxt:/web/nuxt
+            # configs
+            - ./config/nginx/sites:/etc/nginx/templates:ro
+            - ./config/nginx/config/nginx.conf:/etc/nginx/nginx.conf:ro
+            - ./config/nginx/config/fastcgi.conf:/etc/nginx/fastcgi.conf:ro
+            - ./config/nginx/config/security_headers.conf:/etc/nginx/security_headers.conf:ro
+            - ./config/nginx/config/conf.d:/etc/nginx/conf.d:ro
+            # Logs
+            - ./logs/nginx:/var/log/nginx
+        expose:
+            - 8082
+        labels:
+            - traefik.enable=true
+            - "traefik.http.services.genious.loadbalancer.server.port=80"
+            - "traefik.http.routers.genious.tls=true"
+            - "traefik.http.routers.genious.entrypoints=websecure"
+            - "traefik.http.routers.genious.rule=Host(`${DOMAIN_NAME_BACKEND}`, `${DOMAIN_NAME_FRONTEND}`)" # Указываем домен данного контейнера
+            # Включаем для использования letsencrypt
+            - "traefik.http.routers.genious.tls.certresolver=letsencrypt"
+        env_file:
+            - ../.env
+        restart: always
+        networks:
+            - internal
+            - web
+
+    # Прод запускается в собранном виде
+    nuxt:
+        # Контекст-корень для копирования nuxt в контейнер
+        volumes:
+            - ../.env:/.env:ro # @see https://nuxt.com/docs/guide/directory-structure/env
+            - ../web/nuxt:/nuxt:ro
+        image: node:18-alpine
+        working_dir: /app
+        expose:
+            - 3000
+        restart: always
+        entrypoint: ['/bin/sh', '-c']
+        command: ['cp -r /nuxt/.output /app && node /app/.output/server/index.mjs'] # Копируем смонтированную папку и запускам. Нужно для безшовного деплоя
+        env_file:
+            - ../.env
+        networks:
+            - internal
+
+    # bitrix
+    php:
+        build:
+            context: ./config/php
+            dockerfile: Dockerfile.8.1
+        links:
+            - db
+        depends_on:
+            - db
+            - memcached
+        expose:
+            - "9000"
+        volumes:
+            - ../web/bitrix:/web/bitrix
+            - ./config/msmtprc:/etc/msmtprc
+            - ./config/php/90-php.ini:/etc/php/8.1/fpm/conf.d/90-php.ini
+            - ./config/php/90-php.ini:/etc/php/8.1/cli/conf.d/90-php.ini
+            # Logs
+            - ./logs/php:/var/log/php
+            - ./logs/msmtp:/var/log/msmtp
+        restart: always
+        env_file:
+            - ../.env
+        networks:
+            - internal
+
+    # база данных
+    db:
+        image: percona/percona-server:8.0
+        ports:
+            - "3306:3306"
+        expose:
+            - "3306"
+        volumes:
+            # Configuration
+            - ./config/mysql/my.cnf:/etc/my.cnf.d/my.cnf
+            # Data persistence
+            - ./private/mysql-data:/var/lib/mysql
+            # Logs
+            - ./logs/mysql:/var/log/mysql
+        cap_add:
+            - SYS_NICE # CAP_SYS_NICE
+        restart: always
+        env_file:
+            - ../.env
+        networks:
+            - internal
+
+    # memcache для bitrix
+    memcached:
+        image: memcached:1-alpine
+        restart: always
+
+        networks:
+            - internal
+
+networks:
+    web:
+        external: true
+    internal:
+        external: false

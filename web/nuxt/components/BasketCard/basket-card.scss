@@ -1,0 +1,99 @@
+.basket-card {
+    display: flex;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #a8a8a8;
+
+    &__image {
+        width: 123px;
+        min-width: 123px;
+        overflow: hidden;
+        img {
+            display: block;
+            transition: 0.5s ease-in-out;
+            transform-origin: 0 0;
+            width: 100%;
+        }
+        &:hover {
+            img {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    &__content {
+        flex-grow: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__main {
+        width: calc(((100% + 123px) / 2) - 123px);
+        min-width: calc(((100% + 123px) / 2) - 123px);
+    }
+    &__info {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    &__top {
+        flex-grow: 1;
+    }
+
+    &__bottom {
+        padding-left: 25px;
+    }
+
+    &_final {
+        &:first-child {
+            padding-top: 0;
+        }
+        .basket-card__info {
+            padding-right: 0;
+        }
+    }
+    @media screen and (max-width: 1200px) {
+        &__main {
+            width: calc((((100% + 123px) / 3) * 2) - 123px);
+            min-width: calc((((100% + 123px) / 3) * 2) - 123px);
+        }
+    }
+    @media screen and (max-width: 768px) {
+        &:not(.basket-card_final) {
+            padding-bottom: 0;
+            border-bottom: 0;
+            .basket-card__image {
+                width: 162px;
+                min-width: 162px;
+            }
+        }
+
+        &:first-child {
+            padding-top: 0;
+        }
+
+        &__main {
+            width: 100%;
+            min-width: 0;
+        }
+        &__info {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        &__top {
+            padding-left: 15px;
+        }
+
+        &__bottom {
+            padding-left: 15px;
+        }
+        &_final {
+            .basket-card__image {
+                width: 123px;
+                min-width: 123px;
+            }
+        }
+    }
+}
